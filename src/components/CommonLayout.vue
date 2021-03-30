@@ -5,10 +5,10 @@
         <img alt="logo" id='logo' src="@/assets/logo.jpeg" />
         <span class="title">交通视频监控平台</span>
       </div>
-      <a-menu theme="dark" mode="inline" :default-selected-keys="['manage']" :default-open-keys="['view']" >
+      <a-menu @click="handleClick" theme="dark" mode="inline" :default-selected-keys="['manage']" :default-open-keys="['view']" >
         <a-sub-menu key="manage">
           <span slot="title"><a-icon type="video-camera" />监控管理</span>
-          <a-menu-item key="view">
+          <a-menu-item key="home">
               查看监控点
           </a-menu-item>
           <a-menu-item key="add">
@@ -70,10 +70,16 @@ export default {
   data() {
     return {
       collapsed: false,
-    };
+    }
   },
-};
+  methods: {
+    handleClick ({ key }) {
+      this.$emit('select', key, this.target, this.meta)
+    }
+  }
+}
 </script>
+
 <style>
 #components-layout-demo-custom-trigger{
   height: 100%;

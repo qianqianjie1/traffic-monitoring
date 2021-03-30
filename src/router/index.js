@@ -13,7 +13,22 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('@/pages/Home/Home.vue'),
+    component: () => import('@/pages/Home/Home.vue')
+  },
+  {
+    path:'/video',
+    name: 'Video',
+    component: () => import('@/pages/Home/Video.vue'),
+  },
+  {
+    path:'/add',
+    name: 'Add',
+    component: () => import('@/pages/Home/Add.vue'),
+  },
+  {
+    path:'/set',
+    name: 'Set',
+    component: () => import('@/pages/Home/Set.vue'),
   },
   {
     path:'/register',

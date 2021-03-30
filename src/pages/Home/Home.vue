@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <common-layout :breadcrumb="breadcrumb">
+    <common-layout @select="(e)=>(handleSelect(e))" :breadcrumb="breadcrumb">
        <div>
             <div class="top">
                 <h3 class="title">视频监控点</h3>
@@ -13,9 +13,24 @@
                             :src="item['avatar']"
                         />
                         <template slot="actions" class="ant-card-actions">
-                            <a-icon key="setting" type="setting" />
-                            <a-icon key="edit" type="edit" />
-                            <a-icon key="ellipsis" type="ellipsis" />
+                            <a-popover>
+                                <template slot="content">
+                                    <p>配置监控点</p>
+                                </template>
+                                <a-icon key="setting" type="setting" />
+                            </a-popover>
+                            <a-popover>
+                                <template slot="content">
+                                    <p>新建监控点</p>
+                                </template>
+                                <a-icon key="edit" type="edit" />
+                            </a-popover>
+                             <a-popover>
+                                <template slot="content">
+                                    <p>查看监控视频</p>
+                                </template>
+                                <a-icon  @click="()=>(ViewVideo())" key="eye" type="eye" />
+                            </a-popover>
                         </template>
                         <a-card-meta :title="item.title" :description="`负责人：${item.principal}`">
                             <a-avatar
@@ -28,13 +43,16 @@
             </div>
             <div class="bottom">
                  <h3 class="title">详情展示</h3>
-                 <a-table :columns="columns" :data-source="arealist">
+                 <a-table rowKey="key" :columns="columns" :data-source="arealist">
                     <span slot="action">
                         <a> 查看监控 <a-icon type="eye" /> </a>
                     </span>
                  </a-table>
             </div>
        </div>
+       <!-- <div v-else>
+           <router-view></router-view>
+       </div> -->
     </common-layout>
   </div>
 </template>
@@ -45,6 +63,7 @@ import CommonLayout from '@/components/CommonLayout.vue'
 export default {
     data () {
         return {
+            // togglePage:false,
             breadcrumb:['监控管理','查看监控点'],
             columns:[
             {
@@ -143,7 +162,15 @@ export default {
         
     },
     methods: {
-
+        ViewVideo(){
+            this.togglePage=true;
+            this.$router.push({path: '/video'})
+        },
+        handleSelect(key){
+            console.log('key',key)
+            if(key != 'home')
+                this.$router.push({path: key})
+        }
     }
 }
 </script>
