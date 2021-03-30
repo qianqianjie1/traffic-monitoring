@@ -5,6 +5,7 @@ import Antd from 'ant-design-vue'
 import App from './App';
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
+import * as echarts from 'echarts';
 
 Vue.use(Antd)
 Vue.use(VueVideoPlayer, /* {
@@ -18,3 +19,5 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.prototype.$echarts = echarts
